@@ -9,49 +9,29 @@ namespace CPL_Adapter
     class ConfigInfo
     {
         /// <summary>
-        /// 本机UDP接收深度端口号
+        /// DAQ端wits接收IP
         /// </summary>
-        public int LocalDeptPort=9001;
+        public string DaqIP="127.0.0.1";
         /// <summary>
-        /// 本机接收CPL命令端口号
+        /// DAQ端wits接收端口号
         /// </summary>
-        public int LocalCmdRecvPort=9002;
+        public int DaqPort=3000;
         /// <summary>
-        /// CMS端wits接收IP
+        /// Glas端WITS服务端口号
         /// </summary>
-        public string CMSWitsRecvIP="192.168.1.230";
+        public int GlasPort=3001;
         /// <summary>
-        /// CMS端wits接收端口号
+        /// Glas端WITS服务IP
         /// </summary>
-        public int CMSWitsRecvPort=9003;
+        public string GlasIP="10.242.100.83";
         /// <summary>
-        /// CPL端WITS服务端口号
+        /// DAQ箱串口号
         /// </summary>
-        public int CPLWitsPort=9004;
-        /// <summary>
-        /// CPL端WITS服务IP
-        /// </summary>
-        public string CPLWitsIP="192.168.1.231";
-        /// <summary>
-        /// 地面箱串口号
-        /// </summary>
-        public string ComPortNum = "COM2";
+        public string ComPortNum = "COM1";
         /// <summary>
         /// 串口通讯波特率
         /// </summary>
-        public int BaudRate = 460800;
-        /// <summary>
-        /// 司显连接方式 1.有线 0 无线
-        /// </summary>
-        public int DisplayMode = 0;
-        /// <summary>
-        /// 司显节点设备序列号
-        /// </summary>
-        public string DeviceSN = "00000000";
-        /// <summary>
-        /// 司显节点网络密钥
-        /// </summary>
-        public string NetKey = "00000000";
+        public int BaudRate = 115200;
         /// <summary>
         /// 配置信息是否有效
         /// </summary>
@@ -78,23 +58,23 @@ namespace CPL_Adapter
                 XmlDeclaration dec = doc.CreateXmlDeclaration("1.0", "utf-8", null);
                 doc.AppendChild(dec);
                 //LocalDeptPort
-                XmlElement eleLocalDeptPort = doc.CreateElement("LocalDeptPort");
-                XmlText txtLocalDeptPort = doc.CreateTextNode(CfgInfo.LocalDeptPort.ToString());
-                //LocalCmdRecvPort
-                XmlElement eleLocalCmdRecvPort = doc.CreateElement("LocalCmdRecvPort");
-                XmlText txtLocalCmdRecvPort = doc.CreateTextNode(CfgInfo.LocalCmdRecvPort.ToString());
+                //XmlElement eleLocalDeptPort = doc.CreateElement("LocalDeptPort");
+                //XmlText txtLocalDeptPort = doc.CreateTextNode(CfgInfo.LocalDeptPort.ToString());
+                ////LocalCmdRecvPort
+                //XmlElement eleLocalCmdRecvPort = doc.CreateElement("LocalCmdRecvPort");
+                //XmlText txtLocalCmdRecvPort = doc.CreateTextNode(CfgInfo.LocalCmdRecvPort.ToString());
                 //CMSWitsRecvIP
-                XmlElement eleCMSWitsRecvIP = doc.CreateElement("CMSWitsRecvIP");
-                XmlText txtCMSWitsRecvIP = doc.CreateTextNode(CfgInfo.CMSWitsRecvIP);
+                XmlElement eleDaqIP = doc.CreateElement("DaqIP");
+                XmlText txtDaqIP = doc.CreateTextNode(CfgInfo.DaqIP);
                 //CMSWitsRecvPort
-                XmlElement eleCMSWitsRecvPort = doc.CreateElement("CMSWitsRecvPort");
-                XmlText txtCMSWitsRecvPort = doc.CreateTextNode(CfgInfo.CMSWitsRecvPort.ToString());
+                XmlElement eleDaqPort = doc.CreateElement("DaqPort");
+                XmlText txtDaqPort = doc.CreateTextNode(CfgInfo.DaqPort.ToString());
                 //CPLWitsPort
-                XmlElement eleCPLWitsPort = doc.CreateElement("CPLWitsPort");
-                XmlText txtCPLWitsPort = doc.CreateTextNode(CfgInfo.CPLWitsPort.ToString());
+                XmlElement eleGlasPort = doc.CreateElement("GlasPort");
+                XmlText txtGlasPort = doc.CreateTextNode(CfgInfo.GlasPort.ToString());
                 //CPLWitsIP
-                XmlElement eleCPLWitsIP = doc.CreateElement("CPLWitsIP");
-                XmlText txtCPLWitsIP = doc.CreateTextNode(CfgInfo.CPLWitsIP.ToString());
+                XmlElement eleGlasIP = doc.CreateElement("GlasIP");
+                XmlText txtGlasIP = doc.CreateTextNode(CfgInfo.GlasIP.ToString());
                 //ComPortNum
                 XmlElement eleComPortNum = doc.CreateElement("ComPortNum");
                 XmlText txtComPortNum = doc.CreateTextNode(CfgInfo.ComPortNum);
@@ -102,30 +82,30 @@ namespace CPL_Adapter
                 XmlElement eleBaudRate = doc.CreateElement("BaudRate");
                 XmlText txtBaudRate = doc.CreateTextNode(CfgInfo.BaudRate.ToString());
                 //DisplayMode
-                XmlElement eleDisplayMode = doc.CreateElement("DisplayMode");
-                XmlText txtDisplayMode = doc.CreateTextNode(CfgInfo.DisplayMode.ToString());
+                //XmlElement eleDisplayMode = doc.CreateElement("DisplayMode");
+                //XmlText txtDisplayMode = doc.CreateTextNode(CfgInfo.DisplayMode.ToString());
 
                 XmlNode newElem = doc.CreateNode("element", "config", "");
-                newElem.AppendChild(eleLocalDeptPort);
-                newElem.LastChild.AppendChild(txtLocalDeptPort);
+                //newElem.AppendChild(eleLocalDeptPort);
+                //newElem.LastChild.AppendChild(txtLocalDeptPort);
 
-                newElem.AppendChild(eleLocalCmdRecvPort);
-                newElem.LastChild.AppendChild(txtLocalCmdRecvPort);
+                //newElem.AppendChild(eleLocalCmdRecvPort);
+                //newElem.LastChild.AppendChild(txtLocalCmdRecvPort);
 
-                newElem.AppendChild(eleCMSWitsRecvIP);
-                newElem.LastChild.AppendChild(txtCMSWitsRecvIP);
+                newElem.AppendChild(eleDaqIP);
+                newElem.LastChild.AppendChild(txtDaqIP);
 
-                newElem.AppendChild(eleLocalDeptPort);
-                newElem.LastChild.AppendChild(txtLocalDeptPort);
+                //newElem.AppendChild(eleLocalDeptPort);
+                //newElem.LastChild.AppendChild(txtLocalDeptPort);
 
-                newElem.AppendChild(eleCMSWitsRecvPort);
-                newElem.LastChild.AppendChild(txtCMSWitsRecvPort);
+                newElem.AppendChild(eleDaqPort);
+                newElem.LastChild.AppendChild(txtDaqPort);
 
-                newElem.AppendChild(eleCPLWitsPort);
-                newElem.LastChild.AppendChild(txtCPLWitsPort);
+                newElem.AppendChild(eleGlasPort);
+                newElem.LastChild.AppendChild(txtGlasPort);
 
-                newElem.AppendChild(eleCPLWitsIP);
-                newElem.LastChild.AppendChild(txtCPLWitsIP);
+                newElem.AppendChild(eleGlasIP);
+                newElem.LastChild.AppendChild(txtGlasIP);
 
                 newElem.AppendChild(eleComPortNum);
                 newElem.LastChild.AppendChild(txtComPortNum);
@@ -133,8 +113,8 @@ namespace CPL_Adapter
                 newElem.AppendChild(eleBaudRate);
                 newElem.LastChild.AppendChild(txtBaudRate);
 
-                newElem.AppendChild(eleDisplayMode);
-                newElem.LastChild.AppendChild(txtDisplayMode);
+                //newElem.AppendChild(eleDisplayMode);
+                //newElem.LastChild.AppendChild(txtDisplayMode);
 
                 XmlElement root = doc.CreateElement("config");
                 root.AppendChild(newElem);
@@ -162,33 +142,33 @@ namespace CPL_Adapter
                 XmlDocument doc = new XmlDocument();
                 doc.Load("config.xml");
 
-                CfgInfo.LocalDeptPort=int.Parse(doc.SelectSingleNode("//LocalDeptPort").InnerText);
-                CfgInfo.LocalCmdRecvPort = int.Parse(doc.SelectSingleNode("//LocalCmdRecvPort").InnerText);
-                CfgInfo.CMSWitsRecvIP = doc.SelectSingleNode("//CMSWitsRecvIP").InnerText;
-                CfgInfo.CMSWitsRecvPort = int.Parse(doc.SelectSingleNode("//CMSWitsRecvPort").InnerText);
-                CfgInfo.CPLWitsPort = int.Parse(doc.SelectSingleNode("//CPLWitsPort").InnerText);
-                CfgInfo.CPLWitsIP = doc.SelectSingleNode("//CPLWitsIP").InnerText;
+                //CfgInfo.LocalDeptPort=int.Parse(doc.SelectSingleNode("//LocalDeptPort").InnerText);
+                //CfgInfo.LocalCmdRecvPort = int.Parse(doc.SelectSingleNode("//LocalCmdRecvPort").InnerText);
+                CfgInfo.DaqIP = doc.SelectSingleNode("//DaqIP").InnerText;
+                CfgInfo.DaqPort = int.Parse(doc.SelectSingleNode("//DaqPort").InnerText);
+                CfgInfo.GlasPort = int.Parse(doc.SelectSingleNode("//GlasPort").InnerText);
+                CfgInfo.GlasIP = doc.SelectSingleNode("//GlasIP").InnerText;
                 CfgInfo.ComPortNum = doc.SelectSingleNode("//ComPortNum").InnerText;
                 CfgInfo.BaudRate = int.Parse(doc.SelectSingleNode("//BaudRate").InnerText);
-                CfgInfo.DisplayMode = int.Parse(doc.SelectSingleNode("//DisplayMode").InnerText);
+                //CfgInfo.DisplayMode = int.Parse(doc.SelectSingleNode("//DisplayMode").InnerText);
 
 
                 XmlDocument xmldoc = new XmlDocument();
-                if (File.Exists("NodeSettings.xml"))
-                {
-                    xmldoc.Load("NodeSettings.xml");
-                    XmlNodeList xmlnode = xmldoc.SelectSingleNode("Settings").ChildNodes;
-                    foreach (XmlElement element in xmlnode)
-                    {
-                        if (element.Attributes["purpose"].Value == "driller")
-                        {
-                            //司显属性值取得
-                            CfgInfo.DeviceSN = element.Attributes["deviceSN"].Value;
-                            CfgInfo.NetKey = element.Attributes["netKey"].Value;
-                            break;
-                        }
-                    }
-                }
+                //if (File.Exists("NodeSettings.xml"))
+                //{
+                //    xmldoc.Load("NodeSettings.xml");
+                //    XmlNodeList xmlnode = xmldoc.SelectSingleNode("Settings").ChildNodes;
+                //    foreach (XmlElement element in xmlnode)
+                //    {
+                //        if (element.Attributes["purpose"].Value == "driller")
+                //        {
+                //            //司显属性值取得
+                //            CfgInfo.DeviceSN = element.Attributes["deviceSN"].Value;
+                //            CfgInfo.NetKey = element.Attributes["netKey"].Value;
+                //            break;
+                //        }
+                //    }
+                //}
 
                 bIsGet = true;
             }

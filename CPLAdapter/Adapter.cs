@@ -20,11 +20,11 @@ namespace CPL_Adapter
         public bool IsAcq { get; set; }
         public Adapter()
         {
-            //gBox = new GroundBox(DataRecvCallback, Config.CfgInfo.ComPortNum,Config.CfgInfo.BaudRate, Config.CfgInfo.DeviceSN, Config.CfgInfo.NetKey);
+            gBox = new GroundBox(DataRecvCallback, Config.CfgInfo.ComPortNum,Config.CfgInfo.BaudRate);
             curPort = new SerialPort(Config.CfgInfo.ComPortNum, Config.CfgInfo.BaudRate);
-            udpServer = new UdpServer(Config.CfgInfo.LocalDeptPort);
-            tcpServer = new TcpServer(Config.CfgInfo.LocalCmdRecvPort);
-            tcpClient = new TcpClient(Config.CfgInfo.CPLWitsIP, Config.CfgInfo.CPLWitsPort, Config.CfgInfo.CMSWitsRecvIP, Config.CfgInfo.CMSWitsRecvPort,gBox);
+            udpServer = new UdpServer(Config.CfgInfo.DaqPort);
+            tcpServer = new TcpServer(Config.CfgInfo.DaqPort);
+            tcpClient = new TcpClient(Config.CfgInfo.GlasIP, Config.CfgInfo.GlasPort, Config.CfgInfo.DaqIP, Config.CfgInfo.DaqPort,gBox);
             this.curPort.DataReceived += curPort_DataReceived;
         }
 

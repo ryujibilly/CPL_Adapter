@@ -42,12 +42,14 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adapter.cs" />
     <Compile Include="BoxData.cs" />
+    <Compile Include="Command.cs" />
     <Compile Include="CommonData.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="converter.cs" />

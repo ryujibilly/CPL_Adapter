@@ -8,6 +8,6 @@ namespace CPL_Adapter
     {
         bool Start();
         void Stop();
-        void SaveData(string strWits);
+        void SaveData(string strBytes);
     }
 }

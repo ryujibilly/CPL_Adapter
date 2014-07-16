@@ -19,7 +19,7 @@ namespace CPL_Adapter
         private string BoxCom;
         private int BoxBaudRate;
         private int TimerCount = 0;
-        private WirelessProtocol WireProt = null;
+        //private WirelessProtocol WireProt = null;
         private LineProtocol LineProt = null;
         /// <summary>
         /// constructor
@@ -27,11 +27,11 @@ namespace CPL_Adapter
         /// <param name="dataRecv"></param>
         /// <param name="com"></param>
         /// <param name="baudRate"></param>
-        public GroundBox(DataRecvCallback dataRecv,string com,int baudRate,string strSNno,string strKeyno)
+        public GroundBox(DataRecvCallback dataRecv,string com,int baudRate)
         {
             Communication = new SerialPort();
             BoxTimer = new MMTimer(Callback);
-            WireProt = new WirelessProtocol(strSNno,strKeyno);
+            //WireProt = new WirelessProtocol(strSNno,strKeyno);
             LineProt = new LineProtocol();
             GetData = dataRecv;
             BoxCom = com;
@@ -123,16 +123,16 @@ namespace CPL_Adapter
                     continue;
                 }
                 byte[] bytesRet = null;
-                if(Config.CfgInfo.DisplayMode==1)
-                {
-                    //有线
-                    bytesRet=LineProt.GetBytesForDisplay(location, str);
-                }
-                else
-                {
-                    //无线
-                    bytesRet = WireProt.GetBytesForDisplay(location, str);
-                }
+                //if(Config.CfgInfo.DisplayMode==1)
+                //{
+                //    //有线
+                //    bytesRet=LineProt.GetBytesForDisplay(location, str);
+                //}
+                //else
+                //{
+                //    //无线
+                //    bytesRet = WireProt.GetBytesForDisplay(location, str);
+                //}
                 lock (objDisplay)
                 {
                     Displaydata.Add(bytesRet);
@@ -228,7 +228,7 @@ namespace CPL_Adapter
                 byte[] tempNO = new byte[10];
                 byte[] temp = new byte[2];
 
-                uint t = 0;
+                //uint t = 0;
                 int i = 6;
                 while (true)
                 {
