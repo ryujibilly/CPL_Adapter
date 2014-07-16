@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Collections;
 using System.Linq;
 
-namespace CPLAdapter
+namespace CPL_Adapter
 {
     public delegate void DataRecvCallback(byte[] datalist); 
 

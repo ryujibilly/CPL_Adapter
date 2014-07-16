@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 
-namespace CPLAdapter
+namespace CPL_Adapter
 {
     class ConfigInfo
     {

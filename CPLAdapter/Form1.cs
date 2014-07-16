@@ -5,8 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.IO.Ports;
 
-namespace CPLAdapter
+namespace CPL_Adapter
 {
     public partial class Form1 : Form
     {
@@ -19,6 +20,9 @@ namespace CPLAdapter
         {
             btnStart.Enabled = true;
             btnStop.Enabled = false;
+            string[] ports = SerialPort.GetPortNames();
+            txtPort.Items.AddRange(ports);
+            txtPort.SelectedItem = ports[0];
             LoadConfig();
         }
         private void LoadConfig()
@@ -98,6 +102,11 @@ namespace CPLAdapter
             {
                 adp.Stop();
             }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
     }

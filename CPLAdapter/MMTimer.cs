@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace CPLAdapter
+namespace CPL_Adapter
 {
     class MMTimer : IDisposable
     {

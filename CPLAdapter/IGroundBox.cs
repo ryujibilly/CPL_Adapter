@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CPLAdapter
+namespace CPL_Adapter
 {
     interface IGroundBox
     {

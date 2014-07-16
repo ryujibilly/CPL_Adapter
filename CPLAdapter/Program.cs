@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace CPLAdapter
+namespace CPL_Adapter
 {
     static class Program
     {

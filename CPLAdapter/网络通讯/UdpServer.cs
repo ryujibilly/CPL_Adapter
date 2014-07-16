@@ -5,7 +5,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.Threading;
 
-namespace CPLAdapter
+namespace CPL_Adapter
 {
     /// <summary>
     /// UDP服务,接收CMS发送过来的井深数据

@@ -4,7 +4,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 
-namespace CPLAdapter
+namespace CPL_Adapter
 {
     /// <summary>
     /// TCP服务器,接收CPL连接

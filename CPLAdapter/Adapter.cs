@@ -1,56 +1,64 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 
-namespace CPLAdapter
+namespace CPL_Adapter
 {
     class Adapter
     {
         private GroundBox gBox = null;
+        private SerialPort curPort = null;
         UdpServer udpServer = null;
         TcpServer tcpServer = null;
         TcpClient tcpClient = null;
+
+        private byte[] buffer { get; set; }
+        private long mark = 0;
+        public bool IsAcq { get; set; }
         public Adapter()
         {
-            gBox = new GroundBox(DataRecvCallback, Config.CfgInfo.ComPortNum,Config.CfgInfo.BaudRate, Config.CfgInfo.DeviceSN, Config.CfgInfo.NetKey);
-            //gBox.SaveData("&&\r\n071421.2\r\n!!\r\n");
-
-            //byte[] b = new byte[802];
-            //b[0] = (byte)'S';
-            //b[1] = (byte)'S';
-            //for (int i = 2; i <= 801; i++)
-            //{
-            //    b[i] = (byte)i;
-            //}
-
-            //for (int i = 0; i < 100; i++)
-            //{
-            //    CommonData.SaveQueueItem(b);
-            //}
-           
+            //gBox = new GroundBox(DataRecvCallback, Config.CfgInfo.ComPortNum,Config.CfgInfo.BaudRate, Config.CfgInfo.DeviceSN, Config.CfgInfo.NetKey);
+            curPort = new SerialPort(Config.CfgInfo.ComPortNum, Config.CfgInfo.BaudRate);
             udpServer = new UdpServer(Config.CfgInfo.LocalDeptPort);
             tcpServer = new TcpServer(Config.CfgInfo.LocalCmdRecvPort);
             tcpClient = new TcpClient(Config.CfgInfo.CPLWitsIP, Config.CfgInfo.CPLWitsPort, Config.CfgInfo.CMSWitsRecvIP, Config.CfgInfo.CMSWitsRecvPort,gBox);
+            this.curPort.DataReceived += curPort_DataReceived;
+        }
+
+        private void curPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            try {
+                int length = curPort.BytesToRead;//接收数据长度
+                buffer = new byte[length];
+                curPort.Read(buffer, 0, length);
+                mark += buffer.Length;
+                Trace.WriteLine(converter._converter.ByteArrayToHexString(buffer) + "\r\n");
+                if (IsAcq)
+                    Start();
+            }
+            catch(Exception ex)
+            {
+                Trace.WriteLine(ex.Message);
+            }
         }
         private void DataRecvCallback(byte[] datalist)
         {
-            //System.Diagnostics.Debug.WriteLine(datalist.Length + "->" + DateTime.Now.ToString());
-            //return;
             CommonData.SaveQueueItem(datalist);
-            return;
-
-            System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString());
+            Debug.WriteLine(DateTime.Now.ToString());
             for (int i = 0; i < datalist.Length; i++)
             {
 
-                System.Diagnostics.Debug.Write(string.Format("{0:X} ", datalist[i]));
+                Debug.Write(string.Format("{0:X} ", datalist[i]));
                 if (i % 16 == 0)
                 {
                     System.Diagnostics.Debug.Write("\n");
                 }
             }
-            System.Diagnostics.Debug.Write("\n\n\n\n");
+            Debug.Write("\n\n\n\n");
+            return;
         }
         public string Start()
         {
