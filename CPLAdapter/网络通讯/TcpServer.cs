@@ -11,7 +11,7 @@ namespace CPL_Adapter
     /// </summary>
     class TcpServer
     {
-        private int TcpPort = 8002;
+        private int TcpPort = 3001;
         private Socket ServerSocket = null;
         private Thread RecvThread = null;
         private Socket CurClientSocket = null;

@@ -6,12 +6,14 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.IO.Ports;
+using System.Threading;
 
 namespace CPL_Adapter
 {
     public partial class Form1 : Form
     {
         private SerialPort curPort=null;
+        Adapter adp = null;
         public Form1()
         {
             InitializeComponent();
@@ -30,8 +32,6 @@ namespace CPL_Adapter
             Config.GetConfig();
             txtPort.Text = Config.CfgInfo.ComPortNum;
             txtBaud.Text = Config.CfgInfo.BaudRate.ToString();
-
-
             txtGlasIP.Text = Config.CfgInfo.GlasIP;
             txtGlasPort.Text = Config.CfgInfo.GlasPort.ToString();
             txtDaqIP.Text = Config.CfgInfo.DaqIP;
@@ -44,12 +44,10 @@ namespace CPL_Adapter
             {
                 Config.CfgInfo.ComPortNum = txtPort.Text.Trim();
                 Config.CfgInfo.BaudRate = int.Parse(txtBaud.Text.Trim());
-
                 Config.CfgInfo.GlasIP = txtGlasIP.Text.Trim();
                 Config.CfgInfo.GlasPort = int.Parse(txtGlasPort.Text.Trim());
                 Config.CfgInfo.DaqIP = txtDaqIP.Text.Trim();
                 Config.CfgInfo.DaqPort = int.Parse(txtDaqPort.Text.Trim());
-
                 Config.SaveConfig();
             }
             catch
@@ -59,7 +57,7 @@ namespace CPL_Adapter
            
         }
 
-        Adapter adp = null;
+
         private void btnStart_Click(object sender, EventArgs e)
         {
             adp = new Adapter();
@@ -96,12 +94,38 @@ namespace CPL_Adapter
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
         }
 
         private void label8_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            curPort.Write(Command.RESEND,0,5);
+        }
+
+        private void btn_TEST_Click(object sender, EventArgs e)
+        {
+            curPort.Write(Command.TEST, 0, 5);
+            Thread.Sleep(2000);
+            curPort.Write(Command.VERSIONS, 0, 5);
+        }
+
+        private void btn_GOON_Click(object sender, EventArgs e)
+        {
+            curPort.Write(Command.GO_ON, 0, 5);
+        }
+
+        private void btn_SEND_Click(object sender, EventArgs e)
+        {
+            curPort.Write(Command.SEND, 0, 5);
+        }
+
+        private void txtPort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            curPort.PortName = txtPort.SelectedText.Trim();
         }
 
     }

@@ -47,9 +47,15 @@
             this.btnStop = new System.Windows.Forms.Button();
             this.txtSave = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btn_TEST = new System.Windows.Forms.Button();
+            this.btn_GOON = new System.Windows.Forms.Button();
+            this.btn_SEND = new System.Windows.Forms.Button();
+            this.btn_RE = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -76,7 +82,7 @@
             this.txtPort.Size = new System.Drawing.Size(132, 23);
             this.txtPort.TabIndex = 4;
             this.txtPort.Text = "COM1";
-            this.txtPort.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.txtPort.SelectedIndexChanged += new System.EventHandler(this.txtPort_SelectedIndexChanged);
             // 
             // txtBaud
             // 
@@ -109,10 +115,10 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(309, 153);
+            this.btnStart.Location = new System.Drawing.Point(11, 27);
             this.btnStart.Margin = new System.Windows.Forms.Padding(4);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(100, 29);
+            this.btnStart.Size = new System.Drawing.Size(119, 29);
             this.btnStart.TabIndex = 2;
             this.btnStart.Text = "开始";
             this.btnStart.UseVisualStyleBackColor = true;
@@ -226,10 +232,10 @@
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(417, 153);
+            this.btnStop.Location = new System.Drawing.Point(137, 27);
             this.btnStop.Margin = new System.Windows.Forms.Padding(4);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(100, 29);
+            this.btnStop.Size = new System.Drawing.Size(120, 29);
             this.btnStop.TabIndex = 2;
             this.btnStop.Text = "停止";
             this.btnStop.UseVisualStyleBackColor = true;
@@ -237,10 +243,10 @@
             // 
             // txtSave
             // 
-            this.txtSave.Location = new System.Drawing.Point(309, 191);
+            this.txtSave.Location = new System.Drawing.Point(63, 251);
             this.txtSave.Margin = new System.Windows.Forms.Padding(4);
             this.txtSave.Name = "txtSave";
-            this.txtSave.Size = new System.Drawing.Size(208, 29);
+            this.txtSave.Size = new System.Drawing.Size(159, 29);
             this.txtSave.TabIndex = 2;
             this.txtSave.Text = "保存配置信息";
             this.txtSave.UseVisualStyleBackColor = true;
@@ -249,7 +255,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(13, 267);
+            this.label8.Location = new System.Drawing.Point(13, 307);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(412, 15);
@@ -257,17 +263,71 @@
             this.label8.Text = "说明：如果配置信息有改变，先保存配置信息后点击开始按钮";
             this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.btn_TEST);
+            this.groupBox4.Controls.Add(this.btn_GOON);
+            this.groupBox4.Controls.Add(this.btn_SEND);
+            this.groupBox4.Controls.Add(this.btn_RE);
+            this.groupBox4.Controls.Add(this.btnStart);
+            this.groupBox4.Controls.Add(this.btnStop);
+            this.groupBox4.Location = new System.Drawing.Point(289, 133);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(265, 147);
+            this.groupBox4.TabIndex = 5;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "数据采集";
+            // 
+            // btn_TEST
+            // 
+            this.btn_TEST.Location = new System.Drawing.Point(138, 101);
+            this.btn_TEST.Name = "btn_TEST";
+            this.btn_TEST.Size = new System.Drawing.Size(121, 32);
+            this.btn_TEST.TabIndex = 6;
+            this.btn_TEST.Text = "测试、版本号";
+            this.btn_TEST.UseVisualStyleBackColor = true;
+            this.btn_TEST.Click += new System.EventHandler(this.btn_TEST_Click);
+            // 
+            // btn_GOON
+            // 
+            this.btn_GOON.Location = new System.Drawing.Point(137, 63);
+            this.btn_GOON.Name = "btn_GOON";
+            this.btn_GOON.Size = new System.Drawing.Size(121, 32);
+            this.btn_GOON.TabIndex = 5;
+            this.btn_GOON.Text = "续发";
+            this.btn_GOON.UseVisualStyleBackColor = true;
+            this.btn_GOON.Click += new System.EventHandler(this.btn_GOON_Click);
+            // 
+            // btn_SEND
+            // 
+            this.btn_SEND.Location = new System.Drawing.Point(11, 101);
+            this.btn_SEND.Name = "btn_SEND";
+            this.btn_SEND.Size = new System.Drawing.Size(121, 32);
+            this.btn_SEND.TabIndex = 4;
+            this.btn_SEND.Text = "连续发送";
+            this.btn_SEND.UseVisualStyleBackColor = true;
+            this.btn_SEND.Click += new System.EventHandler(this.btn_SEND_Click);
+            // 
+            // btn_RE
+            // 
+            this.btn_RE.Location = new System.Drawing.Point(11, 63);
+            this.btn_RE.Name = "btn_RE";
+            this.btn_RE.Size = new System.Drawing.Size(121, 32);
+            this.btn_RE.TabIndex = 3;
+            this.btn_RE.Text = "重发";
+            this.btn_RE.UseVisualStyleBackColor = true;
+            this.btn_RE.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(579, 296);
+            this.ClientSize = new System.Drawing.Size(579, 347);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.txtSave);
-            this.Controls.Add(this.btnStop);
-            this.Controls.Add(this.btnStart);
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
@@ -280,6 +340,7 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -306,6 +367,11 @@
         private System.Windows.Forms.Button txtSave;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox txtPort;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button btn_RE;
+        private System.Windows.Forms.Button btn_TEST;
+        private System.Windows.Forms.Button btn_GOON;
+        private System.Windows.Forms.Button btn_SEND;
     }
 }
 

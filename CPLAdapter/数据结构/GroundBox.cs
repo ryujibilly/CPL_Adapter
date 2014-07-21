@@ -19,8 +19,9 @@ namespace CPL_Adapter
         private string BoxCom;
         private int BoxBaudRate;
         private int TimerCount = 0;
-        //private WirelessProtocol WireProt = null;
+        private WirelessProtocol WireProt = null;
         private LineProtocol LineProt = null;
+        private Command cmd = new Command();
         /// <summary>
         /// constructor
         /// </summary>
@@ -155,19 +156,19 @@ namespace CPL_Adapter
                 Communication.Parity = Parity.None;
                 Communication.StopBits = StopBits.One;
                 Communication.ReceivedBytesThreshold = 259;
+                Communication.ParityReplace = 0x00;
                 Communication.DataReceived += new SerialDataReceivedEventHandler(Communication_DataReceived);//数据接收的事件
                 Communication.Open();
-                byte[] changeMode = new byte[] { 0xaa, 0x55, 0x01, 0x00, 0x01, 0x00, 0x00, 0x48, 0x01 };
-                SendByte(changeMode);
+                SendByte(Command.SEND);
                 Thread.Sleep(200);
-                Pressuredatatemp.Add(0x53);
-                Pressuredatatemp.Add(0x53); 
+                //Pressuredatatemp.Add(0x53);
+                //Pressuredatatemp.Add(0x53); 
                 bRet = true;
             }
             catch (Exception Erro)
             {
                 bRet = false;
-                System.Diagnostics.Debug.WriteLine(Erro.Message);
+                Debug.WriteLine(Erro.Message);
             }
             return bRet;
         }
@@ -188,20 +189,19 @@ namespace CPL_Adapter
        
         private void print(byte[] receive)
         {
-            //System.Diagnostics.Debug.WriteLine(receive.Length + "->" + DateTime.Now.ToString());
-            //return;
+            Debug.WriteLine(receive.Length + "->" + DateTime.Now.ToString());
             int c = 0;
             for (int i = 0; i < receive.Length; i++)
             {
-                System.Diagnostics.Debug.Write(string.Format("{0:X2} ", receive[i]));
+                Debug.Write(string.Format("{0:X2} ", receive[i]));
                 c++;
-                if (c == 16)
+                if (c == 50)
                 {
-                    System.Diagnostics.Debug.Write("\n");
+                    Debug.Write("\n");
                     c = 0;
                 }
             }
-            System.Diagnostics.Debug.Write("\n\n");
+            Debug.Write("\n\n");
         }
 
         /// <summary>
@@ -213,11 +213,9 @@ namespace CPL_Adapter
         /// </summary>
         private void Communication_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            Thread.Sleep(10);
-                                
+            Thread.Sleep(10);                   
             byte[] receive = new byte[Communication.BytesToRead];
             Communication.Read(receive, 0, receive.Length);
-           
             if (receive.Length < 259)
             {
                 return;
